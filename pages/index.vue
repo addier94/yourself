@@ -28,10 +28,19 @@
 import CourseCard from '~/components/shared/CourseCard'
 import BlogCard from '~/components/shared/BlogCard'
 import Hero from '~/components/shared/Hero'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     CourseCard, BlogCard, Hero
+  },
+  computed: {
+    ...mapState({
+      courses: state => state.course.items
+    })
+  },
+  async fetch({store}) {
+    await store.dispatch('course/fetchCourses')
   }
 }
 </script>
