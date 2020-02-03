@@ -94,9 +94,8 @@ export default {
 
       if (this.isFormValid) {
         this.$store.dispatch('auth/login', this.form)
-          .then(() => {
-            this.$router.push('/')
-          })
+          .then(() => this.$router.push('/'))
+          .catch(() => this.$toasted.error('Correo o Contraseña incorrecto', {duration: 3000}))
       }
 
     }
