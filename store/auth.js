@@ -35,6 +35,16 @@ export const actions = {
       })
       .catch(error => Promise.reject(error))
   },
+  register(_ , registerData) {
+    return this.$axios.$post('/api/v1/users/register', registerData)
+        .catch(error => {
+          let errorMessage = 'Ooops, error inesperado intenta registrarte de nuevo'
+          if (error.response.data.errors) {
+            errorMessage = error.response.data.errors.message
+          }
+          return Promise.reject(errorMessage)
+        })
+  },
   getAuthUser({commit, getters, state}) {
     const authUser = getters.authUser
 
