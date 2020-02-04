@@ -3,8 +3,7 @@
 </template>
 <script>
 export default {
-  middleware: 'admin',
-  layout: 'instructor'
+  middleware: 'admin'
 }
 </script>
 <style lang="scss">
