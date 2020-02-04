@@ -48,12 +48,12 @@
                 <img class="is-rounded" :src="user.avatar">
               </figure>
               <div class="m-r-sm m-b-sm">
-                Welcome {{ user.username }}!
+                Bienvenido {{ user.username }}!
               </div>
               <!-- If Admin -->
               <button
                  v-if="isAdmin" class="button is-link is-outlined"
-                 @click="() => {}">
+                 @click="() => $router.push('/instructor')">
                 Instructor
               </button>
               <a class="button is-primary" @click="logout">
