@@ -21,7 +21,7 @@
       <nuxt-link
         :to="exitLink"
         class="button is-danger is-medium is-inverted is-outlined">
-        Salir a home
+        Ir atras
       </nuxt-link>
     </div>
   </div>
