@@ -41,6 +41,7 @@
                 </button>
                 <button
                   v-else
+                  :disabled="!canProceed"
                   @click="() => {}"
                   class="button is-success is-large float-right">
                   Confirmar
@@ -99,12 +100,12 @@ export default {
   methods: {
     nextStep() {
       this.activeStep++
+      this.canProceed = false;
     },
     previousStep() {
       this.activeStep--
     },
     mergeFormData({data, isValid}) {
-      debugger
       this.form = {...this.form, ...data}
       this.canProceed = isValid
     }
