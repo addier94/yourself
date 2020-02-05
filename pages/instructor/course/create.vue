@@ -91,9 +91,6 @@ export default {
     },
     activeComponent() {
       return this.steps[this.activeStep - 1]
-    },
-    categories() {
-      return this.$store.state.category.items
     }
   },
   fetch({store}) {
@@ -107,6 +104,7 @@ export default {
       this.activeStep--
     },
     mergeFormData({data, isValid}) {
+      debugger
       this.form = {...this.form, ...data}
       this.canProceed = isValid
     }
