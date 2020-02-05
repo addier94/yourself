@@ -9,7 +9,7 @@
         <div class="course-create-form-field">
           <div class="select is-large">
             <select>
-              <option value="default">Select Category</option>
+              <option value="default">Selecciona categoria</option>
               <option>
                 Mobile Development
               </option>
