@@ -11,7 +11,7 @@
           <nuxt-link
             to="/"
             class="button is-danger is-medium is-inverted is-outlined">
-            Estudiante
+            Ir atras
           </nuxt-link>
         </div>
       </template>
