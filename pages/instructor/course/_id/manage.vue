@@ -8,7 +8,7 @@
           <button
             @click="() => {}"
             class="button is-primary is-inverted is-medium is-outlined">
-            Save
+            Guardar
           </button>
         </div>
       </template>
@@ -20,68 +20,50 @@
             <!-- <aside class="menu is-hidden-mobile"> -->
             <aside class="menu">
               <p class="menu-label">
-                Course Editing
+                Editando curso
               </p>
               <ul class="menu-list">
                 <li>
                   <!-- display TargetStudents -->
-                  <a @click.prevent="() => {}"
-                     :class="'active'">Target Your Students
+                  <a @click.prevent="navigateTo(1)"
+                     :class="'active'">Apuntar a estudiantes
                   </a>
                 </li>
                 <li>
                   <!-- display LandingPage -->
-                  <a @click.prevent="() => {}">
-                    Course Landing Page
+                  <a @click.prevent="navigateTo(2)">
+                    Página de inicio del curso
                   </a>
                 </li>
               </ul>
               <p class="menu-label">
-                Course Managment
+                Gestión del curso
               </p>
               <ul class="menu-list">
                 <li>
                   <!-- display Price -->
-                  <a @click.prevent="() => {}">
-                    Price
+                  <a @click.prevent="navigateTo(3)">
+                    precio
                   </a>
                 </li>
                 <li>
                   <!-- display Status -->
-                  <a @click.prevent="() => {}">
-                    Status
+                  <a @click.prevent="navigateTo(4)">
+                    Estado
                   </a>
                 </li>
               </ul>
             </aside>
           </div>
           <div class="column">
-            <target-students />
+            <keep-alive>
+              <component 
+                :is="activeComponent" />
+            </keep-alive>
+            <!-- <target-students />
             <landing-page />
             <price />
-            <status />
-            <div class="card manage-card">
-              <header class="card-header card-section">
-                <p class="card-header-title">Status</p>
-              </header>
-              <div class="card-content card-section">
-                <div class="field">
-                  <label class="label">Status</label>
-                  <div class="select is-medium">
-                    <select>
-                      <option value="default">Change Status</option>
-                      <option value="active">
-                        Active
-                      </option>
-                      <option value="published">
-                        Published
-                      </option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Status End -->
+            <status /> -->
           </div>
         </div>
       </div>
@@ -103,6 +85,22 @@ export default {
     TargetStudents,
     Price,
     Status
+  },
+  data() {
+    return {
+      steps: ['TargetStudents', 'LandingPage', 'Price', 'Status'],
+      activeStep: 1
+    }
+  },
+  computed: {
+    activeComponent() {
+      return this.steps[this.activeStep -1]
+    }
+  },
+  methods: {
+    navigateTo(step) {
+      this.activeStep = step
+    }
   }
 }
 </script>
