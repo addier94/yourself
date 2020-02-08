@@ -27,7 +27,7 @@
       @click="() => {}"
       type="button"
       class="m-b-sm button is-medium is-link is-outlined">
-      Add an answer
+      Agregar una respuesta
     </button>
   </div>
 </template>

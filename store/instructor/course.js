@@ -2,7 +2,8 @@
 
 
 export const state = () => ({
-  items: []
+  items: [],
+  item: {}
 })
 
 export const actions = {
@@ -14,6 +15,13 @@ export const actions = {
     })
       .catch(error => Promise.reject(error))
   },
+  fetchCourseById({commit}, courseId) {
+    return this.$axios.$get(`/api/v1/products/${courseId}`)
+      .then(course => {
+        commit('setCourse', course)
+        return state.item
+      })
+  },
   createCourse(_, courseData) {
     return this.$axios.$post('/api/v1/products', courseData)
   }
@@ -22,5 +30,8 @@ export const actions = {
 export const mutations = {
   setCourses(state, courses) {
     state.items = courses
+  },
+  setCourse(state, course) {
+    state.item = course
   }
 }
