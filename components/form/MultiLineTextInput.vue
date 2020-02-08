@@ -3,13 +3,16 @@
     <!-- Send a label through props -->
     <label class="label">{{ label }}</label>
     <!-- Iterate lines here -->
-    <div class="multi-field field">
+    <div v-for="line in lines" 
+        :key="line.value" 
+        class="multi-field field">
       <div class="control multi-control">
         <div class="multi-input-container">
           <input
+            :value="line.value"
+            :placeholder="'Add Something Nice (:'"
             class="input is-medium multi-input"
-            type="text"
-            :placeholder="'Add Something Nice (:'">
+            type="text">
         </div>
         <div class="btn-container">
           <!-- Delete the line -->
@@ -17,7 +20,7 @@
             @click.prevent="() => {}"
             type="button"
             class="button is-danger multi-button">
-            Delete
+            Eliminar
           </button>
         </div>
       </div>
@@ -37,6 +40,10 @@ export default {
   props: {
     label: {
       type: String,
+      required: true
+    },
+    lines: {
+      type: Array, 
       required: true
     }
   }
