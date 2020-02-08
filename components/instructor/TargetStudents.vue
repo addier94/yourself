@@ -5,25 +5,17 @@
     </header>
     <div class="card-content card-section">
       <form>
-        <div class="field">
-          <div class="control">
-            <input
-              class="input is-large"
-              type="text"
-              placeholder="What will students learn in your course ?"
-              >
-          </div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <input
-              class="input is-large"
-              type="text"
-              placeholder="What are the requirements for the course ?"
-              >
-          </div>
-        </div>
+        <multi-line-text-input label="Que aprenderan los estudiantes" />
+        <multi-line-text-input label="Cuales son los requisitos" />
       </form>
     </div>
   </div>
 </template>
+<script>
+import MultiLineTextInput from '~/components/form/MultiLineTextInput'
+export default {
+  components: {
+    MultiLineTextInput
+  }
+}
+</script>
