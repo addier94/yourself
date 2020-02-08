@@ -6,12 +6,16 @@
     <div class="card-content card-section">
       <form>
         <multi-line-text-input 
-          label="Que aprenderan los estudiantes" 
+          @addClicked="addLine('wsl')"
+          @removeClicked="removeLine($event, 'wsl')"
           :lines="course.wsl"
+          label="Que aprenderan los estudiantes" 
         />
         <multi-line-text-input 
-          label="Cuales son los requisitos" 
+          @addClicked="addLine('requirements')"
+          @removeClicked="removeLine($event, 'requirements')"
           :lines="course.requirements"
+          label="Cuales son los requisitos" 
         />
       </form>
     </div>
@@ -27,6 +31,15 @@ export default {
     course: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    addLine(field) {
+      console.log("ading line for: ", field)
+    },
+    removeLine(index, field) {
+      console.log('Removing line of index:', index)
+      console.log('Removing line for: ', field)
     }
   }
 }

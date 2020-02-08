@@ -3,7 +3,7 @@
     <!-- Send a label through props -->
     <label class="label">{{ label }}</label>
     <!-- Iterate lines here -->
-    <div v-for="line in lines" 
+    <div v-for="(line, index) in lines" 
         :key="line.value" 
         class="multi-field field">
       <div class="control multi-control">
@@ -17,7 +17,7 @@
         <div class="btn-container">
           <!-- Delete the line -->
           <button
-            @click.prevent="() => {}"
+            @click.prevent="emitRemove(index)"
             type="button"
             class="button is-danger multi-button">
             Eliminar
@@ -27,7 +27,7 @@
     </div>
     <!-- Add the Line -->
     <button
-      @click="() => {}"
+      @click="emitAdd"
       type="button"
       class="m-b-sm button is-medium is-link is-outlined">
       Agregar una respuesta
@@ -45,6 +45,14 @@ export default {
     lines: {
       type: Array, 
       required: true
+    }
+  },
+  methods: {
+    emitAdd () {
+      this.$emit('addClicked')
+    },
+    emitRemove (index) {
+      this.$emit('removeClicked', index)
     }
   }
 }
