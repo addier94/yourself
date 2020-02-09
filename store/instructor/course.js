@@ -33,5 +33,11 @@ export const mutations = {
   },
   setCourse(state, course) {
     state.item = course
+  },
+  addLine(state, field) {
+    state.item[field].push({value: ''})
+  },
+  removeLine(state, {field, index}) {
+    state.item[field].splice(index, 1)
   }
 }

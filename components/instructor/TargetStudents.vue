@@ -35,11 +35,10 @@ export default {
   },
   methods: {
     addLine(field) {
-      console.log("ading line for: ", field)
+      this.$store.commit('instructor/course/addLine', field)
     },
     removeLine(index, field) {
-      console.log('Removing line of index:', index)
-      console.log('Removing line for: ', field)
+      this.$store.commit('instructor/course/removeLine', {field, index})
     }
   }
 }
