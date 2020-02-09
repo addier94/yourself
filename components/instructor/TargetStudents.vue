@@ -8,12 +8,14 @@
         <multi-line-text-input 
           @addClicked="addLine('wsl')"
           @removeClicked="removeLine($event, 'wsl')"
+          @valueUpdated="updateLine($event, 'wsl')"
           :lines="course.wsl"
           label="Que aprenderan los estudiantes" 
         />
         <multi-line-text-input 
           @addClicked="addLine('requirements')"
           @removeClicked="removeLine($event, 'requirements')"
+          @valueUpdated="updateLine($event, 'requirements')"
           :lines="course.requirements"
           label="Cuales son los requisitos" 
         />
@@ -39,6 +41,9 @@ export default {
     },
     removeLine(index, field) {
       this.$store.commit('instructor/course/removeLine', {field, index})
+    },
+    updateLine({value, index}, field) {
+      this.$store.dispatch('instructor/course/updateLine', {field, value, index})
     }
   }
 }

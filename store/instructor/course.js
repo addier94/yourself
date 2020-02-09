@@ -24,6 +24,10 @@ export const actions = {
   },
   createCourse(_, courseData) {
     return this.$axios.$post('/api/v1/products', courseData)
+  },
+  updateLine({commit}, {index, value, field}) {
+    commit('setLineValue', {index, value, field})
+    // Surprise commit for next lecture (:
   }
 }
 
@@ -39,5 +43,8 @@ export const mutations = {
   },
   removeLine(state, {field, index}) {
     state.item[field].splice(index, 1)
+  },
+  setLineValue(state, {index, value, field}) {
+    state.item[field][index].value = value
   }
 }
