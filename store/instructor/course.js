@@ -28,6 +28,9 @@ export const actions = {
   updateLine({commit}, {index, value, field}) {
     commit('setLineValue', {index, value, field})
     // Surprise commit for next lecture (:
+  },
+  updateCourseValue({commit}, {value, field}) {
+    commit('setCourseValue', {value, field})
   }
 }
 
@@ -37,6 +40,9 @@ export const mutations = {
   },
   setCourse(state, course) {
     state.item = course
+  },
+  setCourseValue(state, {value, field}) {
+    state.item[field] = value
   },
   addLine(state, field) {
     state.item[field].push({value: ''})
