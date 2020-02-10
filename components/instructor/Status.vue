@@ -1,19 +1,21 @@
 <template>
   <div class="card manage-card">
     <header class="card-header card-section">
-      <p class="card-header-title">Status</p>
+      <p class="card-header-title">Estados</p>
     </header>
     <div class="card-content card-section">
       <div class="field">
-        <label class="label">Status</label>
+        <label class="label">Estado</label>
         <div class="select is-medium">
-          <select>
-            <option value="default">Change Status</option>
+          <select 
+            :value="course.status"
+            @change="($event) => emitCourseValue($event, 'status')">
+            <option value="default">Cambiar estado</option>
             <option value="active">
-              Active
+              Activo
             </option>
             <option value="published">
-              Published
+              Publicado
             </option>
           </select>
         </div>
@@ -21,3 +23,19 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    course: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    emitCourseValue(e, field) {
+      this.$emit('courseValueUpdated', {value: e.target.value, field})
+    }
+  }
+}
+</script>
