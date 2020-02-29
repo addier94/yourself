@@ -6,7 +6,7 @@
       <template #actionMenu>
         <div class="full-page-takeover-header-button">
           <button
-            @click="() => {}"
+            @click="updateCourse"
             class="button is-primary is-inverted is-medium is-outlined">
             Guardar
           </button>
@@ -109,6 +109,11 @@ export default {
     })
   },
   methods: {
+    updateCourse() {
+      this.$store.dispatch('instructor/course/updateCourse')
+        .then(_ => this.$toasted.success('Curso fue actualizado con éxito', {duration: 3000}))
+        .catch(error => this.$toasted.error('Curso no puede ser actualizado'))
+    },
     handleCourseUpdate({value, field}) {
       this.$store.dispatch('instructor/course/updateCourseValue', {field, value})
     }
