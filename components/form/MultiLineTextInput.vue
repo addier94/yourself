@@ -14,7 +14,7 @@
           <input
             @input.prevent="emitUpdate($event, index)"
             :value="line.value"
-            :placeholder="'Add Something Nice (:'"
+            :placeholder="'Añadir algo (:'"
             class="input is-medium multi-input"
             type="text">
         </div>
@@ -70,7 +70,9 @@ export default {
   },
   methods: {
     emitAdd () {
-      this.canAddLine && this.$emit('addClicked')
+      if (this.canAddLine || this.lines.length === 0) {
+        this.$emit('addClicked')
+      }
     },
     emitRemove (index) {
       this.canDeleteLine && this.$emit('removeClicked', index)
