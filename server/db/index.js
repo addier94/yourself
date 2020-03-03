@@ -1,8 +1,13 @@
+
+
+// Main DB File
+
 const mongoose = require('mongoose');
 const keys = require('../keys');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
+// Including all of our model
 require("../models/user");
 require("../models/product");
 require("../models/category");
