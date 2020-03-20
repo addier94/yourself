@@ -26,8 +26,14 @@ import {
   OrderedList,
   BulletList,
   ListItem,
-  CodeBlockHighlight
+  CodeBlockHighlight,
+  Placeholder
 } from 'tiptap-extensions'
+
+import Title from '~/components/editor/components/Title'
+import Subtitle from '~/components/editor/components/Subtitle'
+import Doc from '~/components/editor/components/Doc'
+
 import javascript from 'highlight.js/lib/languages/javascript'
 import css from 'highlight.js/lib/languages/css'
 export default {
@@ -45,6 +51,22 @@ export default {
   mounted() {
     this.editor = new Editor({
       extensions: [
+        new Doc(),
+        new Title(),
+        new Subtitle(),
+        new Placeholder({
+          showOnlyCurrent: false,
+          emptyNodeText: node => {
+            if (node.type.name === 'title') {
+              return 'Titulo de publicación'
+            }
+
+            if (node.type.name === 'subtitle') {
+              return 'subtitulo'
+            }
+            return 'Contenido'
+          }
+        }),
         new Heading({ levels: [1, 2, 3]}),
         new Bold(),
         new Code(),
