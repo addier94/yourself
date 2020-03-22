@@ -95,6 +95,8 @@ export default {
         })
       ]
     })
+    // this.$emit('editorMounted', this.editor)
+    this.$emit('editorMounted', this.setInitialContent)
   },
   beforeDestroy() {
     // Always destroy your editor instance when it's no longer needed
@@ -117,6 +119,9 @@ export default {
 
       return node.textContent
 
+    },
+    setInitialContent(content) {
+      this.editor.setContent(content)
     }
   }
 }
