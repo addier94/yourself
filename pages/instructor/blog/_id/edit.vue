@@ -51,6 +51,7 @@
         <editor 
           @editorMounted="initBlogContent"
           @editorUpdated="updateBlog"
+          :isSaving="isSaving"
         />
       </div>
     </div>
@@ -69,7 +70,8 @@ export default {
   },
   computed: {
     ...mapState({
-      blog: ({instructor}) => instructor.blog.item
+      blog: ({instructor}) => instructor.blog.item,
+      isSaving: ({instructor}) => instructor.blog.isSaving
     })
   },
   async fetch({params, store}) {
@@ -83,9 +85,11 @@ export default {
       }
     },
     updateBlog(blogData) {
-      this.$store.dispatch('instructor/blog/updateBlog', {data: blogData, id: this.blog._id})
-        .then(_ => this.$toasted.success('Blog Actualizado!', {duration: 2000}))
-        .catch(error => this.$toasted.error('Blog no se puede guardar!', {duration: 2000}))
+      if (!this.isSaving) {
+        this.$store.dispatch('instructor/blog/updateBlog', {data: blogData, id: this.blog._id})
+          .then(_ => this.$toasted.success('Blog Actualizado!', {duration: 2000}))
+          .catch(error => this.$toasted.error('Blog no se puede guardar!', {duration: 2000}))
+      }
     }
   }
 }
