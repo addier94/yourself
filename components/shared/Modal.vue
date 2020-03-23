@@ -25,7 +25,7 @@
             class="button is-success">
             {{actionTitle}}
           </button>
-          <button @click="isOpen=false" class="button">Cancel</button>
+          <button @click="isOpen=false" class="button">Cancelar</button>
         </footer>
       </div>
     </div>
@@ -44,7 +44,7 @@ export default {
     },
     actionTitle: {
       type: String,
-      default: 'Commit'
+      default: 'Publicar'
     },
     openBtnClass: {
       type: String,
