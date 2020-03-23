@@ -5,7 +5,7 @@
       title="Escribe tu blog"
       exitLink="/instructor/blogs">
       <!-- TODO: Check if blog status is active -->
-      <template #actionMenu>
+      <template v-if="blog.status === 'active'" #actionMenu>
         <div class="full-page-takeover-header-button">
           <Modal
             @submitted="publishBlog"
@@ -34,18 +34,18 @@
           </Modal>
         </div>
       </template>
-      <!-- <template v-else #actionMenu>
+      <template v-else #actionMenu>
         <div class="full-page-takeover-header-button">
           <Modal
-            openTitle="Unpublish"
+            openTitle="Anular publicación"
             openBtnClass="button is-success is-medium is-inverted is-outlined"
-            title="Unpublish Blog">
+            title="Anular Blog">
             <div>
-              <div class="title">Unpublish blog so it's no longer displayed in blogs page</div>
+              <div class="title">Anular la publicación del blog para que ya no aparezca en la página de blogs</div>
             </div>
           </Modal>
         </div>
-      </template> -->
+      </template>
     </Header>
     <div class="blog-editor-container">
       <div class="container">
@@ -110,7 +110,13 @@ export default {
     },
     publishBlog({closeModal}) {
       const blogContent = this.editor.getContent()
-      debugger
+      blogContent.status = 'published'
+
+      this.$store.dispatch('instructor/blog/updateBlog', {data: blogContent, id: this.blog._id})
+        .then(_=> {
+          this.$toasted.success('Blog ha sido publicado!', {duration: 3000})
+        })
+        .catch(error => this.$toasted.error('¡El blog no se puede publicar!', {duration: 3000}))
     },
     checkBlogValidity() {
       const title = this.editor.getNodeValueByName('title')
