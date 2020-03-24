@@ -8,7 +8,7 @@
       <template v-if="blog.status === 'active'" #actionMenu>
         <div class="full-page-takeover-header-button">
           <Modal
-            @submitted="publishBlog"
+            @submitted="updateBlogStatus($event, 'published')"
             @opened="checkBlogValidity"
             openTitle="Publicar"
             openBtnClass="button is-success is-medium is-inverted is-outlined"
@@ -37,6 +37,7 @@
       <template v-else #actionMenu>
         <div class="full-page-takeover-header-button">
           <Modal
+            @submitted="updateBlogStatus($event, 'active')"
             openTitle="Anular publicación"
             openBtnClass="button is-success is-medium is-inverted is-outlined"
             title="Anular Blog">
@@ -108,13 +109,16 @@ export default {
           .catch(error => this.$toasted.error('Blog no se puede guardar!', {duration: 2000}))
       }
     },
-    publishBlog({closeModal}) {
+    updateBlogStatus({closeModal}, status) {
       const blogContent = this.editor.getContent()
-      blogContent.status = 'published'
+      blogContent.status = status
+debugger
+      const message = status === 'published' ? 'Blog ha sido publicado!' : 'El blog no ha sido publicado!'
 
       this.$store.dispatch('instructor/blog/updateBlog', {data: blogContent, id: this.blog._id})
         .then(_=> {
-          this.$toasted.success('Blog ha sido publicado!', {duration: 3000})
+          this.$toasted.success(message, {duration: 3000})
+          closeModal()
         })
         .catch(error => this.$toasted.error('¡El blog no se puede publicar!', {duration: 3000}))
     },

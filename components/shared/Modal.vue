@@ -44,7 +44,7 @@ export default {
     },
     actionTitle: {
       type: String,
-      default: 'Publicar'
+      default: 'Aceptar'
     },
     openBtnClass: {
       type: String,
