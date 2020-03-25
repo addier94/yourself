@@ -17,7 +17,7 @@
             <ul>
               <!-- set here active tab -->
               <li @click="activeTab = 0">
-                <a :class="{'is-active': activeTab === 0}">En ediciones</a>
+                <a :class="{'is-active': activeTab === 0}">No publicados</a>
                 </li>
               <!-- set here active tab -->
               <li @click="activeTab = 1">
@@ -29,58 +29,49 @@
             <!-- Draft Blogs -->
             <!-- Check-for-active-tab -->
             <template v-if="activeTab === 0">
-              <div>
-                <div class="blog-card">
-                  <h2>Some</h2>
+              <div v-if="drafts && drafts.length > 0">
+                <div  
+                      v-for="dBlog in drafts" 
+                      :key="dBlog._id"
+                      class="blog-card">
+                  <h2>{{ dBlog.title }}</h2>
                   <div class="blog-card-footer">
                     <span>
-                      Last Edited 17th December, 2018
-                    </span>
-                    <!-- Dropdown with menu here -->
-                  </div>
-                </div>
-                <div class="blog-card">
-                  <h2>Some</h2>
-                  <div class="blog-card-footer">
-                    <span>
-                      Last Edited 17th December, 2018
+                      Ultima edición {{ dBlog.updatedAt | formatDate }}
                     </span>
                     <!-- Dropdown with menu here -->
                   </div>
                 </div>
               </div>
               <!-- In case of no drafts blogs  -->
-              <!-- <div class="blog-error">
-                No Drafts :(
-              </div> -->
+              <div v-else class="blog-error">
+                Aun no hay blogs :(
+              </div>
             </template>
             <!-- Published Blogs -->
             <!-- check for active tab -->
             <template v-if="activeTab === 1">
-              <div>
-                <div class="blog-card">
-                  <h2>Blog publicado</h2>
+              <div v-if="published && published.length > 0">
+                <!-- make iteration here for published -->
+                <div
+                      v-for="pBlog in published"
+                      :key="pBlog._id"
+                      class="blog-card">
+                  <!-- title -->
+                  <h2>{{ pBlog.title }}</h2>
                   <div class="blog-card-footer">
+                    <!-- updated -->
                     <span>
-                      Last Edited 17th December, 2018
-                    </span>
-                    <!-- Dropdown with menu here -->
-                  </div>
-                </div>
-                <div class="blog-card">
-                  <h2>Blog publicado</h2>
-                  <div class="blog-card-footer">
-                    <span>
-                      Last Edited 17th December, 2018
+                      Ultima Edición {{ pBlog.updatedAt | formatDate }}
                     </span>
                     <!-- Dropdown with menu here -->
                   </div>
                 </div>
               </div>
-              <!-- In case of no drafts blogs  -->
-              <!-- <div class="blog-error">
-                No Drafts :(
-              </div> -->
+              <!-- In case of no drafts blogs   -->
+              <div v-else class="blog-error">
+                Aun no hay blogs publicado :(
+              </div>
             </template>
           </div>
         </div>
@@ -90,6 +81,7 @@
 </template>
 <script>
 import Header from '~/components/shared/Header'
+import { mapState } from 'vuex'
 export default {
   // data with active tab by default it will be 0
   // 0 represents drafts
@@ -100,6 +92,12 @@ export default {
     return {
       activeTab: 0
     }
+  },
+  computed: {
+    ...mapState({
+      published: ({instructor}) => instructor.blog.items.published,
+      drafts: ({instructor}) => instructor.blog.items.drafts
+    })
   },
   async fetch({store}) {
     await store.dispatch('instructor/blog/fetchUserBlogs')
