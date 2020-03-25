@@ -17,7 +17,7 @@
             <ul>
               <!-- set here active tab -->
               <li @click="activeTab = 0">
-                <a :class="{'is-active': activeTab === 0}">No publicados</a>
+                <a :class="{'is-active': activeTab === 0}">Articulos en borrador</a>
                 </li>
               <!-- set here active tab -->
               <li @click="activeTab = 1">
@@ -39,7 +39,7 @@
                     <span>
                       Ultima edición {{ dBlog.updatedAt | formatDate }}
                     </span>
-                    <!-- Dropdown with menu here -->
+                    <dropdown :items="draftsOptions" />
                   </div>
                 </div>
               </div>
@@ -64,7 +64,7 @@
                     <span>
                       Ultima Edición {{ pBlog.updatedAt | formatDate }}
                     </span>
-                    <!-- Dropdown with menu here -->
+                    <dropdown :items="publishedOptions"/>
                   </div>
                 </div>
               </div>
@@ -81,13 +81,15 @@
 </template>
 <script>
 import Header from '~/components/shared/Header'
+import Dropdown from '~/components/shared/DropDown'
 import { mapState } from 'vuex'
+import { createPublishedOptions, createDraftsOptions } from '~/pages/instructor/options'
 export default {
   // data with active tab by default it will be 0
   // 0 represents drafts
   // 1 represents published
   layout: 'instructor',
-  components: {Header},
+  components: {Header, Dropdown},
   data() {
     return {
       activeTab: 0
@@ -97,7 +99,14 @@ export default {
     ...mapState({
       published: ({instructor}) => instructor.blog.items.published,
       drafts: ({instructor}) => instructor.blog.items.drafts
-    })
+    }),
+    publishedOptions() {
+      return createPublishedOptions()
+    },
+    draftsOptions() {
+      let x = createDraftsOptions()
+      return createDraftsOptions()
+    }
   },
   async fetch({store}) {
     await store.dispatch('instructor/blog/fetchUserBlogs')
