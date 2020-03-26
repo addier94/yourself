@@ -39,7 +39,9 @@
                     <span>
                       Ultima edición {{ dBlog.updatedAt | formatDate }}
                     </span>
-                    <dropdown :items="draftsOptions" />
+                    <dropdown
+                      @optionChanged="handleOption($event, dBlog._id)" 
+                      :items="draftsOptions" />
                   </div>
                 </div>
               </div>
@@ -64,7 +66,9 @@
                     <span>
                       Ultima Edición {{ pBlog.updatedAt | formatDate }}
                     </span>
-                    <dropdown :items="publishedOptions"/>
+                    <dropdown
+                      @optionChanged="handleOption($event, dBlog._id)" 
+                      :items="publishedOptions"/>
                   </div>
                 </div>
               </div>
@@ -83,7 +87,9 @@
 import Header from '~/components/shared/Header'
 import Dropdown from '~/components/shared/DropDown'
 import { mapState } from 'vuex'
-import { createPublishedOptions, createDraftsOptions } from '~/pages/instructor/options'
+import {  createPublishedOptions, 
+          createDraftsOptions,
+          commands } from '~/pages/instructor/options'
 export default {
   // data with active tab by default it will be 0
   // 0 represents drafts
@@ -110,6 +116,16 @@ export default {
   },
   async fetch({store}) {
     await store.dispatch('instructor/blog/fetchUserBlogs')
+  },
+  methods: {
+    handleOption(command, blogId) {
+      if (command === commands.EDIT_BLOG) {
+        this.$router.push(`/instructor/blog/${blogId}/edit`)
+      }
+      if (command === commands.DELETE_BLOG) {
+        alert('Deleting Blog')
+      }
+    }
   }
 }
 </script>
