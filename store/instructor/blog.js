@@ -14,7 +14,7 @@ function separateBlogs(blogs) {
 
 export const state = ({
   items: {
-    drats: [],
+    drafts: [],
     published: []
   },
   item: {},
@@ -39,8 +39,29 @@ export const actions = {
       commit('setBlogs', {resource: 'published', items: published})
 
       return { published, drafts}
-      // commit blogs
     })
+  },
+  // deleteBlog({commit, state}, blog) {
+  //   debugger
+  //   const resource = blog.status = 'active' ? 'drafts' : 'published'
+  //   return this.$axios.$delete(`/api/v1/blogs/${blog._id}`)
+  //     .then(_ => {
+  //       const index = state.items[resource].findIndex((b) => b._id === blog._id )
+  //       commit('deleteBlog', {resource, index})
+  //       return true
+  //     })
+  //     .catch(error => Promise.reject(error))
+  // },
+  deleteBlog({commit, state}, blog) {
+    const resource = blog.status === 'active' ? 'drafts' : 'published'
+    return this.$axios.$delete(`/api/v1/blogs/${blog._id}`)
+      .then(_ => {
+        debugger
+        const index = state.items[resource].findIndex((b) => b._id === blog._id )
+        commit('deleteBlog', {resource, index})
+        return true
+      })
+      .catch(error => Promise.reject(error))
   },
   updateBlog({commit, state}, {data, id}) {
     commit('setIsSaving', true)
@@ -63,6 +84,9 @@ export const mutations = {
   },
   setBlogs(state, {resource, items}) {
     state.items[resource] = items
+  },
+  deleteBlog(state, {resource, index}) {
+    state.items[resource].splice(index, 1)
   },
   setIsSaving(state, isSaving) {
     state.isSaving = isSaving

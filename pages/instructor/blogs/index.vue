@@ -40,7 +40,7 @@
                       Ultima edición {{ dBlog.updatedAt | formatDate }}
                     </span>
                     <dropdown
-                      @optionChanged="handleOption($event, dBlog._id)" 
+                      @optionChanged="handleOption($event, dBlog)" 
                       :items="draftsOptions" />
                   </div>
                 </div>
@@ -67,7 +67,7 @@
                       Ultima Edición {{ pBlog.updatedAt | formatDate }}
                     </span>
                     <dropdown
-                      @optionChanged="handleOption($event, dBlog._id)" 
+                      @optionChanged="handleOption($event, pBlog)" 
                       :items="publishedOptions"/>
                   </div>
                 </div>
@@ -110,7 +110,6 @@ export default {
       return createPublishedOptions()
     },
     draftsOptions() {
-      let x = createDraftsOptions()
       return createDraftsOptions()
     }
   },
@@ -118,12 +117,19 @@ export default {
     await store.dispatch('instructor/blog/fetchUserBlogs')
   },
   methods: {
-    handleOption(command, blogId) {
+    handleOption(command, blog) {
       if (command === commands.EDIT_BLOG) {
-        this.$router.push(`/instructor/blog/${blogId}/edit`)
+        this.$router.push(`/instructor/blog/${blog._id}/edit`)
       }
       if (command === commands.DELETE_BLOG) {
-        alert('Deleting Blog')
+        this.displayDeleteWarning(blog)
+      }
+    },
+    displayDeleteWarning(blog) {
+      const isConfirm = confirm('Estas seguro que quieres eliminar ?')
+      if (isConfirm) {
+        this.$store.dispatch('instructor/blog/deleteBlog', blog)
+          .then(_=> this.$toasted.success('Blog eliminado con éxito!', {duration: 2000}))
       }
     }
   }
