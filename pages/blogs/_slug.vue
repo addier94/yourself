@@ -1,4 +1,40 @@
 
 <template>
-  <h1>I AM DETAIL PAGE</h1>
+<div class="blog-editor-container">
+  <div class="container">
+    <div>
+      <user-tile
+        :name="blog.author.name"
+        :avatar="blog.author.avatar"
+        :date="blog.createdAt | formatDate"
+      />
+    </div>
+    <div v-html="blog.content"></div>
+  </div>
+</div>
 </template>
+<script>
+import UserTile from '~/components/shared/UserTile'
+
+export default {
+  components: {
+    UserTile
+  },
+  computed: {
+    blog() {
+      return this.$store.state.blog.item
+    }
+  },
+  
+  async fetch({store, params}) {
+    await store.dispatch('blog/fetchBlogBySlug', params.slug)
+  }
+}
+</script>
+
+<style scoped lang="scss">
+  .blog-content {
+    max-width: 800px;
+    margin: 10px auto;
+  }
+</style>
