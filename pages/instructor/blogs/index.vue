@@ -34,7 +34,7 @@
                       v-for="dBlog in drafts" 
                       :key="dBlog._id"
                       class="blog-card">
-                  <h2>{{ dBlog.title }}</h2>
+                  <h2>{{displayBlogTitle(dBlog) }}</h2>
                   <div class="blog-card-footer">
                     <span>
                       Ultima edición {{ dBlog.updatedAt | formatDate }}
@@ -60,7 +60,7 @@
                       :key="pBlog._id"
                       class="blog-card">
                   <!-- title -->
-                  <h2>{{ pBlog.title }}</h2>
+                  <h2>{{displayBlogTitle(pBlog) }}</h2>
                   <div class="blog-card-footer">
                     <!-- updated -->
                     <span>
@@ -131,6 +131,9 @@ export default {
         this.$store.dispatch('instructor/blog/deleteBlog', blog)
           .then(_=> this.$toasted.success('Blog eliminado con éxito!', {duration: 2000}))
       }
+    },
+    displayBlogTitle(blog) {
+      return blog.title || blog.subtitle || 'Blog sin titulo ni subtitulo :('
     }
   }
 }

@@ -56,7 +56,6 @@ export const actions = {
     const resource = blog.status === 'active' ? 'drafts' : 'published'
     return this.$axios.$delete(`/api/v1/blogs/${blog._id}`)
       .then(_ => {
-        debugger
         const index = state.items[resource].findIndex((b) => b._id === blog._id )
         commit('deleteBlog', {resource, index})
         return true
