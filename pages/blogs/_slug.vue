@@ -2,23 +2,25 @@
 <template>
 <div class="blog-editor-container">
   <div class="container">
-    <div>
+    <div class="blog-content-user">
       <user-tile
         :name="blog.author.name"
         :avatar="blog.author.avatar"
         :date="blog.createdAt | formatDate"
       />
     </div>
-    <div v-html="blog.content"></div>
+    <editor-view :initialContent="blog.content" />
   </div>
 </div>
 </template>
 <script>
 import UserTile from '~/components/shared/UserTile'
+import EditorView from '~/components/editor/EditorView'
 
 export default {
   components: {
-    UserTile
+    UserTile,
+    EditorView
   },
   computed: {
     blog() {
@@ -33,7 +35,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .blog-content {
+  .blog-content, .blog-content-user {
     max-width: 800px;
     margin: 10px auto;
   }

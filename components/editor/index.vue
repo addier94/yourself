@@ -2,11 +2,11 @@
   <div class="editor editor-squished">
     <basic-menu :editor="editor">
       <template #saveButton>
-        <button 
+        <button
           @click="emitUpdate"
           :disabled="isSaving"
           class="button is-success button-save">
-          Guardar
+          Save
         </button>
       </template>
     </basic-menu>
@@ -22,7 +22,7 @@
 import { Editor, EditorContent } from 'tiptap'
 import BubbleMenu from '~/components/editor/BubbleMenu'
 import BasicMenu from '~/components/editor/BasicMenu'
-import { 
+import {
   Heading,
   Bold,
   Code,
@@ -38,11 +38,9 @@ import {
   CodeBlockHighlight,
   Placeholder
 } from 'tiptap-extensions'
-
 import Title from '~/components/editor/components/Title'
 import Subtitle from '~/components/editor/components/Subtitle'
 import Doc from '~/components/editor/components/Doc'
-
 import javascript from 'highlight.js/lib/languages/javascript'
 import css from 'highlight.js/lib/languages/css'
 export default {
@@ -53,8 +51,11 @@ export default {
   },
   props: {
     isSaving: {
-      requried: false,
+      required: false,
       default: false
+    },
+    mode: {
+      default: 'none'
     }
   },
   data() {
@@ -64,7 +65,37 @@ export default {
   },
   // This is called only on client (in browser)
   mounted() {
-    this.editor = new Editor({
+    if (this.mode === 'none') { return this.initEditor() }
+    this.$emit('editorMounted', this.setInitialContent)
+  },
+  beforeDestroy() {
+    // Always destroy your editor instance when it's no longer needed
+    this.editor && this.editor.destroy()
+  },
+  methods: {
+    emitUpdate() {
+      const content = this.getContent()
+      this.$emit('editorUpdated', content)
+    },
+    getContent() {
+      const html = this.editor.getHTML()
+      const title = this.getNodeValueByName('title')
+      const subtitle = this.getNodeValueByName('subtitle')
+      return {content: html, title, subtitle}
+    },
+    getNodeValueByName(name) {
+      const docContent = this.editor.state.doc.content
+      const nodes = docContent.content
+      const node = nodes.find(n => n.type.name === name)
+      if (!node) return ''
+      return node.textContent
+    },
+    setInitialContent(content) {
+      this.initEditor(content);
+    },
+    initEditor(content = '') {
+      this.editor = new Editor({
+      content,
       extensions: [
         new Doc(),
         new Title(),
@@ -73,13 +104,12 @@ export default {
           showOnlyCurrent: false,
           emptyNodeText: node => {
             if (node.type.name === 'title') {
-              return 'Titulo de publicación'
+              return 'Inspirational Title'
             }
-
             if (node.type.name === 'subtitle') {
-              return 'subtitulo'
+              return 'Some catchy subtitle'
             }
-            return 'Contenido'
+            return 'Write your story...'
           }
         }),
         new Heading({ levels: [1, 2, 3]}),
@@ -102,36 +132,6 @@ export default {
         })
       ]
     })
-    // this.$emit('editorMounted', this.editor)
-    this.$emit('editorMounted', this.setInitialContent)
-  },
-  beforeDestroy() {
-    // Always destroy your editor instance when it's no longer needed
-    this.editor && this.editor.destroy()
-  },
-  methods: {
-    emitUpdate() {
-      const content = this.getContent()
-      this.$emit('editorUpdated', content)
-    },
-    getContent() {
-      const html = this.editor.getHTML()
-      const title = this.getNodeValueByName('title')
-      const subtitle = this.getNodeValueByName('subtitle')
-      return {content: html, title, subtitle}
-    },
-    getNodeValueByName(name) {
-      const docContent = this.editor.state.doc.content
-      const nodes = docContent.content
-      const node = nodes.find(n => n.type.name === name)
-
-      if (!node) return ''
-
-      return node.textContent
-
-    },
-    setInitialContent(content) {
-      this.editor.setContent(content)
     }
   }
 }
@@ -140,7 +140,7 @@ export default {
 <style scoped lang="scss">
   .button-save {
     float: right;
-    background-color: #2ed160;
+    background-color: #23d160;
     &:hover {
       background-color: #2bc76c;
     }

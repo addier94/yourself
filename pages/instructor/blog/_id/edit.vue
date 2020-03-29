@@ -54,6 +54,7 @@
           @editorMounted="initBlogContent"
           @editorUpdated="updateBlog"
           :isSaving="isSaving"
+          :mode="'update'"
           ref="editor"
         />
       </div>
