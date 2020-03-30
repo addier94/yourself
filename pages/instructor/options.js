@@ -12,8 +12,8 @@ const createOption = (name, command) => ({name, command})
 // Published Blogs
 const DELETE_BLOG = createOption('Eliminar Articulo', commands.DELETE_BLOG)
 const EDIT_BLOG = createOption('Editar Articulo', commands.EDIT_BLOG)
-const FEATURE_BLOG = createOption('Caracteristicas del blog', commands.TOGGLE_FEATURE)
-const UN_FEATURE_BLOG = createOption('Blog sin funciones', commands.TOGGLE_FEATURE)
+const FEATURE_BLOG = createOption('Destacar', commands.TOGGLE_FEATURE)
+const UN_FEATURE_BLOG = createOption('No Destacar', commands.TOGGLE_FEATURE)
 
 // Options
 // Drafts Blogs

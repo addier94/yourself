@@ -1,4 +1,4 @@
-
+import Vue from 'vue'
 
 
 function separateBlogs(blogs) {
@@ -62,8 +62,14 @@ export const actions = {
       })
       .catch(error => Promise.reject(error))
   },
-  updatePublishedBlog(blog) {
-    alert('FEATURING BLOG')
+  updatePublishedBlog({commit, state}, {id, data}) {
+    return this.$axios.$patch(`/api/v1/blogs/${id}`, data)
+      .then(blog => {
+        const index  = state.items['published'].findIndex(b => b._id === id)
+        commit('setPublishedBlog', {index, blog})
+        return blog
+      })
+      .catch(error => Promise.reject(error))
   },
   updateBlog({commit, state}, {data, id}) {
     commit('setIsSaving', true)
@@ -83,6 +89,9 @@ export const actions = {
 export const mutations = {
   setBlog(state, blog) {
     state.item = blog
+  },
+  setPublishedBlog(state, {index, blog}) {
+    Vue.set(state.items.published, index, blog)
   },
   setBlogs(state, {resource, items}) {
     state.items[resource] = items
