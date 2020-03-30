@@ -41,17 +41,6 @@ export const actions = {
       return { published, drafts}
     })
   },
-  // deleteBlog({commit, state}, blog) {
-  //   debugger
-  //   const resource = blog.status = 'active' ? 'drafts' : 'published'
-  //   return this.$axios.$delete(`/api/v1/blogs/${blog._id}`)
-  //     .then(_ => {
-  //       const index = state.items[resource].findIndex((b) => b._id === blog._id )
-  //       commit('deleteBlog', {resource, index})
-  //       return true
-  //     })
-  //     .catch(error => Promise.reject(error))
-  // },
   deleteBlog({commit, state}, blog) {
     const resource = blog.status === 'active' ? 'drafts' : 'published'
     return this.$axios.$delete(`/api/v1/blogs/${blog._id}`)
