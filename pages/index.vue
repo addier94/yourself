@@ -4,7 +4,7 @@
     <section class="section">
       <div class="container">
         <h1 class="title">Featured Courses</h1>
-        <div class="columns">
+        <div class="columns is-multiline">
           <!-- iterate columns with v-for and don't forget :key -->
           <div 
             v-for="course in courses" 
@@ -18,10 +18,12 @@
     </section>
     <section class="section">
       <div class="container">
-        <h1 class="title">Featured Articles</h1>
-        <div class="columns">
-          <div class="column is-one-quarter">
-            <blog-card />
+        <h1 class="title">Articulos destacados</h1>
+        <div class="columns is-multiline">
+          <div v-for="blog in featuredBlogs" :key="blog._id" class="column is-one-quarter">
+            <blog-card
+              :blog="blog"
+            />
           </div>
         </div>
       </div>
@@ -41,11 +43,13 @@ export default {
   },
   computed: {
     ...mapState({
-      courses: state => state.course.items
+      courses: state => state.course.items,
+      featuredBlogs: state => state.blog.items.featured
     })
   },
   async fetch({store}) {
     await store.dispatch('course/fetchCourses')
+    await store.dispatch('blog/fetchFeaturedBlogs', {'filter[featured]': true})
   }
 }
 </script>
