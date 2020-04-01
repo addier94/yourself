@@ -25,8 +25,9 @@
             <div class="section">
               <no-ssr placeholder="Loading...">
                 <paginate
+                v-model="currentPage"
                   :page-count="pagination.pageCount"
-                  :click-handler="handleClick"
+                  :click-handler="fetchBlogs"
                   :prev-text="'Anterior'"
                   :next-text="'Siguiente'"
                   :container-class="'paginationContainer'">
@@ -71,18 +72,33 @@ export default {
       publishedBlogs: state => state.blog.items.all,
       featuredBlogs: state => state.blog.items.featured,
       pagination: state => state.blog.pagination
-    })
+    }),
+    currentPage: {
+      get() {
+        return this.$store.state.blog.pagination.pageNum
+      },
+      set(value) {
+        this.$store.commit('blog/setPage', value)
+      }
+    }
   },
   async fetch({store}) {
+    // Try to get values from query
     const filter = {}
     filter.pageNum = 1
     filter.pageSize = 2
+
     await store.dispatch('blog/fetchBlogs', filter)
     await store.dispatch('blog/fetchFeaturedBlogs', {'filter[featured]': true})
   },
   methods: {
-    handleClick() {
-      alert('Page Clicked!')
+    fetchBlogs() {
+      const filter = {}
+      filter.pageSize = this.pagination.pageSize
+      filter.pageNum = this.pagination.pageNum
+
+      //Here store the query params!
+      this.$store.dispatch('blog/fetchBlogs', filter)
     }
   }
 }
