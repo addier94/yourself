@@ -18,7 +18,7 @@
             openBtnClass="button is-primary is-inverted is-medium is-outlined"
             title="Poner este curso en destacado"
             @opened="applyCourseValues"
-            @submitted="() => {}">
+            @submitted="createCourseHero">
             <div>
               <form>
                 <div class="field">
@@ -164,6 +164,15 @@ export default {
       this.$store.dispatch('instructor/course/updateCourse')
         .then(_ => this.$toasted.success('Curso fue actualizado con éxito', {duration: 3000}))
         .catch(error => this.$toasted.error('Curso no puede ser actualizado'))
+    },
+    createCourseHero({closeModal}) {
+      const heroData = {...this.courseHero}
+      heroData.product = {...this.course}
+      this.$store.dispatch('hero/createHero', heroData)
+        .then(() => {
+          closeModal()
+          this.$toasted.success('Curso destacado ha sido creado!', {duration: 3000})
+        })
     },
     handleCourseUpdate({value, field}) {
       this.$store.dispatch('instructor/course/updateCourseValue', {field, value})
