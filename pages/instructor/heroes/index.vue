@@ -32,6 +32,7 @@
             <td class="modal-td" v-show="false">
             <portal :to="`modal-view-${hero._id}`">
               <Modal
+                @submitted="activateHero($event, hero._id)"
                 :ref="`modal-${hero._id}`"
                 :showButton="false"
                 actionTitle="Activar"
@@ -79,6 +80,13 @@ export default {
     openModal(modalId) {
       const modal = this.$refs[`modal-${modalId}`][0]
       modal.openModal()
+    },
+    activateHero({closeModal}, heroId) {
+      this.$store.dispatch('instructor/activateHero', heroId)
+        .then(_=> {
+          this.$toasted.success('Activado con exito', {duration: 2000})
+          closeModal()
+        })
     }
   }
 }
