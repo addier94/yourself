@@ -2,69 +2,50 @@
 <template>
   <div class="heroes-page">
     <div class="container">
-      <h1 class="title">Course Heroes</h1>
-      <portal-target name="modal-view-hero-1" />
-      <portal-target name="modal-view-hero-2" />
+      <h1 class="title">Cursos destacado</h1>
+      <portal-target 
+        v-for="hero in heroes"
+        :key="hero._id"
+        :name="`modal-view-${hero._id}`"
+      />
       <table class="heroes-table table is-responsive">
         <thead>
           <tr class="main-table-row">
-            <th>Image</th>
-            <th>Title</th>
-            <th>Subtitle</th>
-            <th>Status</th>
+            <th>Imagen</th>
+            <th>Titulo</th>
+            <th>Subtitlo</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
-          <tr @click="openModal('1')" class="table-row">
-            <td>Hero Image</td>
-            <td>Hero Title</td>
-            <td>Hero Subtitle</td>
-            <td>Active/ Inactive</td>
+          <tr 
+            v-for="hero in heroes"
+            :key="hero._id"
+            @click="openModal(hero._id)" 
+            :class="{'isActive': activeHero._id === hero._id}"
+            class="table-row"
+          >
+            <td>{{ hero.image || 'No establecido' }}</td>
+            <td>{{ hero.title || 'No establecido' }}</td>
+            <td>{{ hero.subtitle || 'No establecido' }}</td>
+            <td>{{ activeHero._id === hero._id ? 'Activo' : 'Inactivo' }}</td>
             <td class="modal-td" v-show="false">
-            <portal to="modal-view-hero-1">
+            <portal :to="`modal-view-${hero._id}`">
               <Modal
-                ref="modal-1"
+                :ref="`modal-${hero._id}`"
                 :showButton="false"
-                actionTitle="Make Active"
-                openTitle="Favorite"
-                title="Make Course Hero">
+                actionTitle="Activar"
+                openTitle="Favorito"
+                title="Destacar curso">
                 <div>
                   <div class="subtitle">
-                    Title: Some Title
+                    Title: {{ hero.title || 'No establecido' }}
                   </div>
                   <div class="subtitle">
-                    Subtitle: Some Subtitle
+                    Subtitle: {{ hero.subtitle || 'No establecido' }}
                   </div>
                   <figure class="image is-3by1">
-                    <img>
-                  </figure>
-                </div>
-              </Modal>
-            </portal>
-            </td>
-          </tr>
-          <tr @click="openModal('2')" class="table-row">
-            <td>Hero Image</td>
-            <td>Hero Title</td>
-            <td>Hero Subtitle</td>
-            <td>Active/ Inactive</td>
-            <td class="modal-td" v-show="false">
-            <portal to="modal-view-hero-2">
-              <Modal
-                ref="modal-2"
-                :showButton="false"
-                actionTitle="Make Active"
-                openTitle="Favorite"
-                title="Make Course Hero">
-                <div>
-                  <div class="subtitle">
-                    Title: Some Title 2
-                  </div>
-                  <div class="subtitle">
-                    Subtitle: Some Subtitle 2
-                  </div>
-                  <figure class="image is-3by1">
-                    <img>
+                    <img :src="hero.image">
                   </figure>
                 </div>
               </Modal>
@@ -87,13 +68,17 @@ export default {
     heroes() {
       return this.$store.state.instructor.heroes
     },
+    activeHero() {
+      return this.$store.state.hero.item
+    }
   },
   async fetch({store}) {
     await store.dispatch('instructor/fetchHeroes')
   },
   methods: {
     openModal(modalId) {
-      this.$refs[`modal-${modalId}`].openModal()
+      const modal = this.$refs[`modal-${modalId}`][0]
+      modal.openModal()
     }
   }
 }
@@ -107,8 +92,6 @@ export default {
   .title {
     font-size: 45px;
     font-weight: bold;
-  }
-  .isActive {
   }
   .table-row {
     margin: 20px;
