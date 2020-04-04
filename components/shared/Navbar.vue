@@ -22,21 +22,21 @@
     <div id="navbarBasicExample"
          class="navbar-menu">
       <div class="navbar-start">
-        <nuxt-link to="/" class="navbar-item">
+        <nav-link to="/" class="navbar-item">
           Home
-        </nuxt-link>
-        <nuxt-link to="/courses" class="navbar-item">
+        </nav-link>
+        <nav-link to="/courses" class="navbar-item">
           Courses
-        </nuxt-link>
-        <nuxt-link to="/blogs" class="navbar-item">
+        </nav-link>
+        <nav-link to="/blogs" class="navbar-item">
           Blogs
-        </nuxt-link>
-        <nuxt-link to="/about" class="navbar-item">
+        </nav-link>
+        <nav-link to="/about" class="navbar-item">
           About
-        </nuxt-link>
-        <nuxt-link to="/cv" class="navbar-item">
+        </nav-link>
+        <nav-link to="/cv" class="navbar-item">
           Cv
-        </nuxt-link>
+        </nav-link>
       </div>
 
       <div class="navbar-end">
@@ -57,15 +57,15 @@
                 Instructor
               </button>
               <a class="button is-primary" @click="logout">
-                Logout
+                Cerrar sesion
               </a>
             </template>
             <template v-else>
               <nuxt-link to="/register" class="button is-primary">
-                Sign up
+                Registro
               </nuxt-link>
               <nuxt-link to="/login" class="button is-light">
-                Log in
+                Iniciar sesion
               </nuxt-link>
             </template>
           </div>
