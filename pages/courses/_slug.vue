@@ -1,12 +1,23 @@
 <template>
   <div>
+    <product-hero 
+      :title="course.title"
+      :subtitle="course.subtitle"
+      :author="course.author">
+      <product-hero-card
+        :price="course.price"
+        :discountedPrice="course.price"
+        :navigateTo="course.productLink"
+        :requirements="course.requirements"
+        :image="course.image" />
+    </product-hero>
     <div class="container">
       <div class="columns">
         <div class="column is-9">
           <div class="section">
             <div class="what-you-get">
               <div class="what-you-get-title">
-                What you will learn
+                Lo que vas a aprender
               </div>
               <ul class="what-you-get-items">
                 <!-- TODO: Iterate course wsl -->
@@ -20,7 +31,7 @@
             </div>
           </div>
           <div class="section course-description p-t-none">
-            <div class="course-description-title">Course Info</div>
+            <div class="course-description-title">Información del curso</div>
             <div class="course-description-details">
               <!-- TODO: use v-html for description -->
               <div v-html="course.description"></div>
@@ -33,7 +44,12 @@
 </template>
 
 <script>
+import ProductHero from '~/components/ProductHero'
+import ProductHeroCard from '~/components/ProductHeroCard'
 export default {
+  components: {
+    ProductHero, ProductHeroCard
+  },
   computed: {
     course() {
       return this.$store.state.course.item
@@ -92,7 +108,7 @@ export default {
       ol {
         margin-left: 20px;
       }
-      
+
       strong {
         font-size: 20px;
       }
