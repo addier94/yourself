@@ -58,6 +58,9 @@ import { mapState } from 'vuex'
 import Subtitle from '~/components/editor/components/Subtitle';
 
 export default {
+  head: {
+    title: 'Cursos en linea y blogs | Alfredo Fernandez'
+  },
   components: {
     CourseCard, BlogCard, Hero, CourseCardTooltip
   },

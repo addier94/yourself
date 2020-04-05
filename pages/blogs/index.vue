@@ -67,6 +67,9 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  head: {
+    title: 'Lee Blogs sobre programacion y tecnologias | Alfredo Fernandez '
+  },
   computed: {
     ...mapState({
       publishedBlogs: state => state.blog.items.all,
