@@ -1,0 +1,4 @@
+User-agent: *
+Disalow: /login
+Disallow: /register
+Disallow: /instructor/*
