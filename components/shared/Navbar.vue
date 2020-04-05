@@ -106,6 +106,10 @@ export default {
   }
   .navbar-brand {
     padding-right: 30px;
+
+    @media screen and (max-width: 1023px) {
+      padding-right: 0;
+    }
   }
   .avatar {
     margin-right: 5px;
