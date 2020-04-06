@@ -8,7 +8,7 @@
         <!-- Go to /instructor/courses -->
         <div class="box" @click="$router.push('/instructor/courses')">
           <div>
-            Courses
+            Cursos
           </div>
         </div>
         <!-- Go to /instructor/blogs -->
@@ -20,7 +20,7 @@
         <!-- Go to /instructor/heroes -->
         <div class="box" @click="$router.push('/instructor/heroes')">
           <div>
-            Heroes
+            Cursos destacado
           </div>
         </div>
       </div>

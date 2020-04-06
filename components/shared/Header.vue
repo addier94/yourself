@@ -1,7 +1,7 @@
 <template>
   <div class="full-page-takeover-header">
     <div class="full-page-takeover-header-logo">
-      <p class="full-page-takeover-header-logo-title">@afreddier</p>
+      <p class="full-page-takeover-header-logo-title">AF</p>
     </div>
     <div class="full-page-takeover-header-divider">
     </div>
