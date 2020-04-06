@@ -1,11 +1,12 @@
 <template>
-  <h1>I am cv page</h1>
+  <div>
+    <iframe :style="{width: '100%', height: '800px'}" src="/alfredo_cv.pdf"></iframe>
+  </div>
 </template>
-
 <script>
 export default {
   head: {
-    title: 'CV | Alfredo Fernandez '
+    title: 'Alfredo Fernandez CV | Filip Jerga'
   }
 }
 </script>

@@ -8,7 +8,7 @@
     />
     <section class="section">
       <div class="container">
-        <h1 class="title">Featured Courses</h1>
+        <h1 class="title">Cursos destacados</h1>
         <div class="columns is-multiline">
           <!-- iterate columns with v-for and don't forget :key -->
           <div 
