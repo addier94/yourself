@@ -6,13 +6,15 @@ const Category = require('../models/category');
 
 const user1Id = mongoose.Types.ObjectId();
 const user2Id = mongoose.Types.ObjectId();
-const user3Id = mongoose.Types.ObjectId();
+
 
 const product1Id = mongoose.Types.ObjectId();
 const product2Id = mongoose.Types.ObjectId();
 
 const category1Id = mongoose.Types.ObjectId();
 const category2Id = mongoose.Types.ObjectId();
+const category3Id = mongoose.Types.ObjectId();
+const category4Id = mongoose.Types.ObjectId();
 
 module.exports = {
   "users": {
@@ -20,13 +22,13 @@ module.exports = {
     items: [
       {
       "_id": user1Id,
-      "avatar": "https://b.kisscc0.com/20180718/urw/kisscc0-ninja-computer-icons-samurai-youtube-avatar-ninja-5b4ed903c2dd20.4931332915318940197982.jpg",
-      "email": "filip@gmail.com",
-      "name": "Filip Jerga",
+      "avatar": "https://afportfolio.herokuapp.com/profile.jpg",
+      "email": "alfredo@gmail.com",
+      "name": "Alfredo Fernandez",
       "info": "Bla bla bla bla",
       "createdAt": moment().toISOString(),
       "updatedAt": moment().toISOString(),
-      "username": "Rhonyn99",
+      "username": "alfreddier",
       "password": "testtest",
       "role": 'admin',
       "products": [product1Id]
@@ -40,18 +42,7 @@ module.exports = {
       "createdAt": moment().toISOString(),
       "updatedAt": moment().toISOString(),
       "username": "Petergreen",
-      "password": "testtest1"
-    },
-    {
-      "_id": user3Id,
-      "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuqyc3j2s3bL4DIkC8uC9h0rcAdsDXcwJPNh8XHWbLQfHbOpVU",
-      "email": "kevin@gmail.com",
-      "name": "Kevin Rock",
-      "info": "I have a famous name",
-      "createdAt": moment().toISOString(),
-      "updatedAt": moment().toISOString(),
-      "username": "Kevin21",
-      "password": "testtest2"
+      "password": "testtest"
     }]
   },
   categories: {
@@ -63,6 +54,12 @@ module.exports = {
       },{
         "_id": category2Id,
         "name": "Mobile Development"
+      },{
+        "_id": category3Id,
+        "name": "Cloud Servers"
+      },{
+        "_id": category4Id,
+        "name": "Rest API"
       }
     ]
   },
@@ -71,41 +68,38 @@ module.exports = {
     items: [
       {
         "_id": product1Id,
-        "slug": 'Dart-and-Flutter-From-Zero-to-Hero-Practical-Dev-Bootcamp',
-        "title": "Dart and Flutter From Zero to Hero - Practical Dev Bootcamp",
-        "subtitle": "Build real mobile Application for Android and iOS. Learn Dart Framework and discover amazing features of Flutter.",
-        "image": "https://i.udemycdn.com/course/750x422/2381802_d90c_3.jpg",
-        "description": "After dart introduction, we will start learning Flutter Framework. I will explain the basics of flutter, what widgets are, why you need widgets and how they work. We will start with simple examples which will later grow into complex components of our application. I will introduce different architectural patterns on how to manage a state of our application. We will always follow best practices introduced by the Google Flutter team.",
+        "slug": 'meetup-app-en-vue-y-nodejs',
+        "title": "Meetup app en vue y nodejs",
+        "subtitle": "Este proyecto cubre las funcionalidades base de cualquier aplicación",
+        "image": "https://scontent.fvvi1-2.fna.fbcdn.net/v/t1.15752-9/92632244_506530853584955_8086607700999274496_n.png?_nc_cat=106&_nc_sid=b96e70&_nc_oc=AQms8JulLkjLjoypsS-q3oH486fK8IFL9Shm1Dd3HeAKgagKmrxMP6t0j180pAABE11BZMxqhUd3hhNOpackgHWc&_nc_ht=scontent.fvvi1-2.fna&oh=db75a7134d0972427bc3db41ebdc5a38&oe=5EB39E43",
+        "description": "<p>El proyecto este construido con vue en el frontend y node en backend y socket.io para la parte de tiempo real si requiere funcionalidades extra puede solicitar, a mi correo alfredofernandezcarlos@gmail.com</p>",
         "wsl": [
           {
-            "value": "Learn and master Dart Programming Language"
+            "value": "Esta aplicacion esta enfocado para reuniones"
           },
           {
-            "value": "Completely understand the processes and concepts of Flutter Framework"
+            "value": "Los discuciones son en tiempo real cuando se crea un evento"
           },
           {
-            "value": "Use gained knowledge to create your own Mobile Applications"
-          },
-          {
-            "value": "Become fluent in concepts and tools like BLoC's, State Management, Services, Widgets and More!"
+            "value": "Las busqueda de eventos es con respecto a la ubicacion del usuario"
           }
         ],
         "requirements": [
           {
-            "value": "No Dart and Flutter previous knowledge is required!"
+            "value": "Si quiere la aplicación puede escribirme a alfredofernandez@gmail.com"
           },
           {
-            "value": "Able to run Android Studio or Xcode Simulator"
+            "value": "Al proyecto se le puede añadir funcionalidades extra si haci lo desea"
           }
         ],
-        "promoVideoLink": "https://a2.udemycdn.com/2019-06-16_01-03-38-b4b3369ea5ef3ab87a5c44952d66fbda/WebHD_720p.mp4?nva=20190620043055&token=0d53de33a501d22e72d76",
-        "productLink": "https://www.udemy.com/dart-and-flutter-from-zero-to-hero-practical-dev-bootcamp",
+        "promoVideoLink": "https://meetupsapp.herokuapp.com",
+        "productLink": "https://meetupsapp.herokuapp.com",
         "price": 179.99,
-        "discountedPrice": 9.99,
+        "discountedPrice": 49.99,
         "status": "published",
         "createdAt": moment().toISOString(),
         "updatedAt": moment().toISOString(),
-        "category": category2Id,
+        "category": category4Id,
         "author": user1Id
       },
       {
