@@ -19,9 +19,6 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ],
-    script: [
-      { src: 'https://kit.fontawesome.com/80a58c155e.js' }
     ]
   },
   /*
@@ -32,7 +29,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '@/assets/scss/main.scss'
+    '@/assets/scss/main.scss',
+    '@/assets/css/icons.css'
   ],
   styleResources: {
     scss: [
