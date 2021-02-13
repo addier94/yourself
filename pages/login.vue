@@ -1,14 +1,11 @@
 <template>
   <section class="hero is-success is-fullheight">
-    <div class="hero-body">
+    <div class="hero-body m-b-5">
       <div class="container has-text-centered">
         <div class="column is-4 is-offset-4">
           <h3 class="title has-text-grey">Iniciar sesion</h3>
           <p class="subtitle has-text-grey">Por favor inicia sesion</p>
           <div class="box">
-            <figure class="avatar">
-              <img src="https://via.placeholder.com/300">
-            </figure>
             <form>
               <div class="field">
                 <div class="control">
@@ -45,15 +42,15 @@
                 @click.prevent="login"
                 :disabled="$v.form.$invalid"
                 class="button is-block is-info is-large is-fullwidth">
-                Login
+                Iniciar sesion
               </button>
             </form>
           </div>
           <p class="has-text-grey">
-            <a>Sign In With Google</a> &nbsp;·&nbsp;
-            <nuxt-link to="/register">Sign Up</nuxt-link> &nbsp;·&nbsp;
+            <a>Iniciar sesion con google</a> &nbsp;·&nbsp;
+            <nuxt-link to="/register">Registrarse</nuxt-link> &nbsp;·&nbsp;
 
-            <a href="../">Need Help?</a>
+            <a href="../">Necesitas ayuda?</a>
           </p>
         </div>
       </div>
@@ -111,6 +108,9 @@ export default {
   .hero .nav, .hero.is-success .nav {
     -webkit-box-shadow: none;
     box-shadow: none;
+  }
+  .hero-body.m-b-5{
+    margin-bottom: 5rem;
   }
   .box {
     margin-top: 5rem;

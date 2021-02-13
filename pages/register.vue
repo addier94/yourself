@@ -6,9 +6,6 @@
         <h3 class="title has-text-grey">Register</h3>
         <p class="subtitle has-text-grey">Por favor procede el registro.</p>
         <div class="box">
-          <figure class="avatar">
-            <img src="https://via.placeholder.com/300">
-          </figure>
           <form>
             <div class="field">
               <div class="control">
@@ -103,14 +100,14 @@
                 @click.prevent="register"
                 :disabled="$v.form.$invalid"
                 type="button"
-                class="button is-block is-info is-large is-fullwidth">Register
+                class="button is-block is-info is-large is-fullwidth">Registro
               </button>
           </form>
         </div>
         <p class="has-text-grey">
-          <nuxt-link to="/login">Login</nuxt-link> &nbsp;·&nbsp;
-          <a>Sign Up With Google</a> &nbsp;·&nbsp;
-          <a href="../">Need Help?</a>
+          <nuxt-link to="/login">Iniciar sesion</nuxt-link> &nbsp;·&nbsp;
+          <a>Iniciar sesion con google</a> &nbsp;·&nbsp;
+          <a href="../">Necesitas ayuda?</a>
         </p>
       </div>
     </div>

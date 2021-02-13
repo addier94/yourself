@@ -15,8 +15,8 @@
       <a
         :href="navigateTo"
         target="_"
-        class="button is-fullwidth is-large is-danger is-outlined m-b-sm">
-        Inscríbase en Udemy
+        class="button is-fullwidth is-large is-info is-outlined m-b-sm">
+        Unirme al curso
       </a>
       <div class="content">
         <div class="m-b-none course-features">Requisitos del curso</div>

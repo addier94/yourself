@@ -2,9 +2,9 @@
   <div>
     <div class="main-content">
       <div class="container">
-        <div class="columns is-mobile">
+        <div class="d-grid">
           <!-- posts -->
-          <div class="column is-8">
+          <div class="post-public">
             <!-- blog -->
             <div class="section">
               <div 
@@ -12,11 +12,14 @@
                     :key="blog._id"
                     class="post">
                 <div @click="$router.push(`/blogs/${blog.slug}`)" class="post-header clickable">
+                  <figure class="avatar-in-blog d-flex align-items-center">
+                      <img class="m-r-sm" :src="blog.author.avatar ? blog.author.avatar : 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSNYjU6pmBARJ191GCVK0UncdRoj_zVSJ4ZjLkRuSoDICKTfWxA&usqp=CAU'">
+                    <div class="post-content">
+                      Por {{ blog.author.name }}, {{ blog.createdAt | formatDate }}
+                    </div>
+                  </figure>
                   <h4 class="title is-4">{{ blog.title }}</h4>
                   <h5 class="subtitle is-5">{{ blog.subtitle }}</h5>
-                </div>
-                <div class="post-content">
-                  Por {{ blog.author.name }}, {{ blog.createdAt | formatDate }}
                 </div>
               </div>
             </div>
@@ -37,12 +40,12 @@
             <!-- end of pagination -->
           </div>
           <!-- side bar -->
-          <div class="column is-4 is-narrow">
+          <div class="featured">
             <!-- featured -->
             <div class="section">
               <div class="sidebar">
                 <div class="sidebar-header">
-                  <h4 class="title is-4">Featured Posts</h4>
+                  <h4 class="title is-4">Articulos Destacados</h4>
                 </div>
                 <div class="sidebar-list">
                   <!-- Featured Blogs -->
@@ -120,7 +123,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .post-content {
   font-style: italic;
 }
@@ -142,14 +145,14 @@ a {
     color: #000;
 }
 .button:focus {
-    border-color: #d74436;
+    border-color: $primary;
     box-shadow: 0 0 0 0;
 }
 .input, .textarea, .input[type] {
     font-size: 1.1rem;
 }
 .input:focus, .textarea:focus, .input[type]:focus {
-    border: 2px solid #d74436;
+    border: 2px solid $primary;
 }
 /* this is used when inline-styled content
    overlaps text backgrounds in a really ugly way */
@@ -174,10 +177,10 @@ a.nav-item.is-tab {
     padding: 0.4rem;
 }
 a.nav-item:hover {
-    color: #d74436;
+    color: $primary;
 }
 a.nav-item.is-tab:hover {
-    border-bottom: 4px solid #d74436;
+    border-bottom: 4px solid $primary;
 }
 /* main content */
 .main-content {
@@ -185,11 +188,14 @@ a.nav-item.is-tab:hover {
     min-height: 800px
 }
 .main-content .container {
-    padding: 0 2rem 2rem 2rem;
+    padding-bottom: 2rem;
 }
 /* section */
 .section {
     padding: 0 0 2rem 0;
+    .post{
+      margin-bottom: 1rem;
+    }
 }
 .section-header {
     padding-bottom: 3rem;
@@ -200,7 +206,7 @@ a.nav-item.is-tab:hover {
     font-size: 1.3rem;
 }
 .section-header a {
-    color: #d74436;
+    color: $primary;
     font-weight: 700;
 }
 .section-header a:hover {
@@ -208,9 +214,8 @@ a.nav-item.is-tab:hover {
 }
 /* sidebar */
 .sidebar-header {
-    border-color: #d74436;
-    padding-bottom: 1rem;
-    border-bottom: 4px solid #d74436;
+    border-color: $primary;
+    border-bottom: 4px solid $primary;
 }
 .sidebar-header .title, .sidebar-header-single .title {
     font-weight: 700;
@@ -224,8 +229,12 @@ a.nav-item.is-tab:hover {
 }
 .sidebar-list a {
     color: #4a4a4a;
+    &:hover{
+      margin-left: .2rem;
+      color: $primaryColor;
+    }
 }
-.sidebar-list, .post-content, .sidebar-list-single {
+.sidebar-list, .sidebar-list-single {
     padding-top: 1.4rem;
 }
 .sidebar-list-nav {
@@ -242,17 +251,28 @@ a.nav-item.is-tab:hover {
     font-weight: 700;
     text-transform: uppercase;
     font-size: 1.1rem;
-    border-right: 4px solid #d74436;
+    border-right: 4px solid $primary;
     padding-right: 1rem;
 }
 .sidebar-footer-single a:hover {
     color: #363636;
 }
 /* post */
+.post-header{
+  &:hover{
+    cursor: pointer;
+    background: $primaryLightColor;
+    border-left: 5px solid $primaryColor;
+  }
+}
+.post-header .avatar-in-blog img{
+  border-radius: 50%;
+  width: 3rem;
+}
 .post-header, .sidebar-header-single {
-    border-color: #d74436;
+    border-color: $primary;
     padding-left: 1rem;
-    border-left: 4px solid #d74436;
+    border-left: 4px solid $primary;
 }
 .post-header .title {
     font-weight: 700;
@@ -283,11 +303,11 @@ a.nav-item.is-tab:hover {
     padding-top: 0.2rem;
 }
 .post-single-content p:nth-child(even) {
-    border-right: 4px solid #d74436;
+    border-right: 4px solid $primary;
     padding-right: 1rem;
 }
 .post-content a {
-    color: #d74436;
+    color: $primary;
 }
 .card-content-form form {
     padding-top: 1.5rem;
@@ -297,11 +317,39 @@ a.nav-item.is-tab:hover {
 }
 /* pagination */
 .pagination-content {
-    border-right: 4px solid #d74436;
+    border-right: 4px solid $primary;
     padding-right: 1rem;
 }
 .pagination-link.is-current {
-    background-color: #d74436;
-    border-color: #d74436;
+    background-color: $primary;
+    border-color: $primary;
 }
+
+
+
+
+.d-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "post-public   post-public    featured";
+  gap: 1rem;
+  .post-public{
+    grid-area: post-public;
+  }
+  .featured{
+    grid-area: featured;
+  }
+}
+@media (max-width: 992px)
+{
+  .d-grid{
+    grid-template-columns: 1fr;
+    grid-template-areas: "featured" 
+                          "post-public";
+    .featured{
+      margin: 0 2rem;
+    }
+  }
+}
+
 </style>

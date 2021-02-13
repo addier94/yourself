@@ -1,3 +1,10 @@
+/* 
+====== 
+Fonts
+======
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300i,400|Solway:400,500&display=swap");
+
 
 @import "./variables";
 @import "./bulma";
@@ -8,4 +15,109 @@
 
 .blog-editor-container {
   padding-top: 60px;
+}
+*{
+  padding: 0;
+}
+body{
+  font-family: $primaryFont;
+  color: $mainBlack;
+  background: $mainBackground;
+  line-height: 1.4;
+  font-size: 1rem;
+  font-weight: 300;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $slantedFont;
+  letter-spacing: $mainSpacing;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: $mainBlack;
+}
+img {
+  width: 100%;
+  display: block;
+}
+
+
+/* 
+====== 
+Buttons 
+======
+*/
+.btn,
+.btn-white,
+.btn-primary {
+  text-transform: uppercase;
+  letter-spacing: $mainSpacing;
+  color: $primaryColor;
+  border: 2px solid $primaryColor;
+  padding: 0.45rem 0.8rem;
+  display: inline-block;
+  transition: $mainTransition;
+  cursor: pointer;
+  font-size: 0.8rem;
+  background: transparent;
+  border-radius: $mainBorderRadius;
+  display: inline-block;
+}
+.btn:hover {
+  background: $primaryColor;
+  color: $mainWhite;
+}
+.btn-white {
+  background: transparent;
+  color: $mainWhite;
+  border-color: $mainWhite;
+}
+.btn-white:hover {
+  background: $mainWhite;
+  color: $primaryColor;
+}
+.btn-primary {
+  background: $primaryColor;
+  color: $mainWhite;
+  border-color: $primaryColor;
+}
+.btn-primary:hover {
+  background: transparent;
+  color: $primaryColor;
+}
+.btn-block {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  box-shadow: $lightShadow;
+  text-align: center;
+}
+.btn-details {
+  padding: 0.25rem 0.4rem;
+}
+.btn-details:hover {
+  background: $primaryLightColor;
+  border-color: $primaryLightColor;
+}
+.bg-primary{
+  background: $primaryColor;
+  border-color: transparent;
+  color: $mainWhite;
+}
+
+.d-flex {
+  display: flex;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.align-items-center {
+  align-items: center;
 }

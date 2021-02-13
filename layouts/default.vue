@@ -1,6 +1,7 @@
 <template>
   <div>
-    <navbar />
+    <!-- <navbar /> -->
+    <navbar2 />
     <nuxt />
     <app-footer />
   </div>
@@ -8,10 +9,13 @@
 
 <script>
 import AppFooter from '~/components/shared/Footer'
-import Navbar from '~/components/shared/Navbar'
+// import Navbar from '~/components/shared/Navbar'
+import Navbar2 from '~/components/shared/Navbar2'
 export default {
   components: {
-    Navbar, AppFooter
+    // Navbar,
+    AppFooter, 
+    Navbar2
   }
 }
 </script>

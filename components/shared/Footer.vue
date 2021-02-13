@@ -2,10 +2,21 @@
   <div class="hero-footer footer footer-custom">
     <div class="container">
       <div class="has-text-centered">
-        <span class="icon">
-          <i class="fab fa-github"></i>
-        </span>
-        <p>Github <a target="_" href="https://github.com/afreddier">github.com/afreddier</a></p>
+        <a href="#">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="#">
+            <i class="fab fa-facebook-square"></i>
+        </a>
+        <a href="#">
+            <i class="fab fa-twitter-square"></i>
+        </a>
+        <a href="#">
+          <i class="fab fa-youtube-square"></i>
+        </a>
+        <div class="m-t-sm">
+          © {{new Date().getFullYear()}} Todos los derechos reservado
+        </div>
       </div>
     </div>
   </div>
@@ -15,21 +26,32 @@
   .icon {
     margin-bottom: 20px;
   }
-  .fa-github {
-    font-size: 45px;
+  .fa-github, .fa-facebook-square, .fa-twitter-square, .fa-youtube-square {
+    font-size: 3rem;
   }
   .footer-custom {
-      background-color: #0d0c0d;
-      color: #fff;
+      background-color: $primaryColor;
+    a{
+      margin-left: .2rem;
+      margin-right: .2rem;
+      i{
+        color: $primaryLightColor;  
+      }
+      .fa-github:hover{
+        color: #171515;
+      }
+      .fa-facebook-square:hover{
+        color: #3b5998;
+      }
+      .fa-twitter-square:hover{
+        color: #00acee;
+      }
+      .fa-youtube-square:hover{
+        color: #c4302b;
+      }  
+    }
   }
-  .footer-custom p {
-      font-size: 1rem;
-      font-weight: 500;
-  }
-  .footer-custom a {
-      color: #d74436;
-  }
-  .footer-custom a:hover {
-      color: #e50076;
+  .hero-footer{
+    padding: 6rem 1rem 10rem;
   }
 </style>

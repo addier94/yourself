@@ -81,8 +81,7 @@ export default {
     display: inline-block;
   }
   .is-black {
-    background-color: black;
-    background: linear-gradient(#29303B,#29303B,#29303B);
+    background: $mainOverlay;
   }
   .title {
     font-weight: bold;

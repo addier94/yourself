@@ -3,12 +3,11 @@
     <section class="section">
       <div class="container">
         <h1 class="title">Todos los cursos</h1>
-        <div class="columns is-multiline">
+        <div class="cocktails-center">
           <!-- iterate columns with v-for and don't forget :key -->
           <div 
             v-for="course in courses" 
-            :key="course._id" 
-            class="column is-one-quarter">
+            :key="course._id">
             <!-- Pass a course as a prop to course-card -->
             <v-popover
               offset="16"
@@ -61,4 +60,15 @@ export default {
   .links {
     padding-top: 15px;
   }
+
+.cocktails-center {
+  width: $smallWidth;
+  margin: 0 auto;
+  max-width: $fullWidth;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(370.8px, 1fr));
+  column-gap: 1.8rem;
+  row-gap: 1.8rem;
+  /* align-items: start; */
+}
 </style>

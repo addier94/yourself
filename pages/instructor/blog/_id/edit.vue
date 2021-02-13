@@ -113,7 +113,6 @@ export default {
     updateBlogStatus({closeModal}, status) {
       const blogContent = this.editor.getContent()
       blogContent.status = status
-debugger
       const message = status === 'published' ? 'Blog ha sido publicado!' : 'El blog no ha sido publicado!'
 
       this.$store.dispatch('instructor/blog/updateBlog', {data: blogContent, id: this.blog._id})
