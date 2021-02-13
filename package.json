@@ -1,7 +1,7 @@
 {
   "name": "Alfredo-Fernandez",
   "version": "1.0.0",
-  "description": "Hola mi nombre es alfredo soy un sotfware developer, con experiencia en php, en específico con framework laravel y nodejs de lado del servidor, en frontend con angular y vuejs",
+  "description": "Hola mi nombre es alfredo soy un sotfware developer, con experiencia en php, utilizando el framework laravel y nodejs de lado del servidor, en frontend con angular y vuejs",
   "author": "Alfredo Fernandez",
   "private": true,
   "scripts": {
@@ -27,7 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.25.1",
     "mongoose": "^5.6.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.14.12",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "portal-vue": "^2.1.7",
