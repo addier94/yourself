@@ -1,6 +1,5 @@
 
 module.exports = {
-  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -14,7 +13,7 @@ module.exports = {
       { hid: 'og:locale', name: 'og:locale', content: 'es-BO' },
       { hid: 'og:url', name: 'og:url', content: process.env.BASE_URL || 'http://localhost:3000' },
       { hid: 'og:type', name: 'og:type', content: 'website' },
-      { hid: 'og:image', name: 'og:image', content: 'https://images.unsplash.com/photo-1544256718-3bcf237f3974?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80'},
+      { hid: 'og:image', name: 'og:image', content: 'https://images.unsplash.com/photo-1544256718-3bcf237f3974?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80' },
       { hid: 'og:description', name: 'og:description', content: 'Este sitio contiene recursos como, Post, Cursos código fuente (variedad de tecnologias de programación)' }
     ],
     link: [
@@ -41,13 +40,13 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '~/plugins/filters'},
-    {src: '~/plugins/vuelidate'},
-    {src: '~/plugins/integrations'},
-    {src: '~/plugins/components'},
-    {src: '~/plugins/tooltip'},
-    {src: '~/plugins/toasted', ssr: false},
-    {src: '~/plugins/paginate', ssr: false},
+    { src: '~/plugins/filters' },
+    { src: '~/plugins/vuelidate' },
+    { src: '~/plugins/integrations' },
+    { src: '~/plugins/components' },
+    { src: '~/plugins/tooltip' },
+    { src: '~/plugins/toasted', ssr: false },
+    { src: '~/plugins/paginate', ssr: false },
   ],
   /*
   ** Nuxt.js modules
