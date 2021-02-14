@@ -26,21 +26,21 @@ exports.getBlogs = (req, res) => {
   const skips = pageSize * (pageNum - 1);
   const filters = req.query.filter || {}
 
-  Blog.find({status: 'published', ...filters})
-      .sort({'createdAt': -1})
-      .populate('author -_id -password -products -email -role')
-      .skip(skips)
-      .limit(pageSize)
-      .exec(function(errors, publishedBlogs) {
-    if (errors) {
-      return res.status(422).send(errors);
-    }
+  Blog.find({ status: 'published', ...filters })
+    .sort({ 'createdAt': -1 })
+    .populate('author -_id -password -products -email -role')
+    .skip(skips)
+    .limit(pageSize)
+    .exec(function (errors, publishedBlogs) {
+      if (errors) {
+        return res.status(422).send(errors);
+      }
 
-    Blog.count({status: 'published'})
-      .then(count => {
-        return res.json({blogs: publishedBlogs, count, pageCount: Math.ceil(count / pageSize)});
-      });
-  });
+      Blog.count({ status: 'published' })
+        .then(count => {
+          return res.json({ blogs: publishedBlogs, count, pageCount: Math.ceil(count / pageSize) });
+        });
+    });
 }
 
 exports.getMediumBlogs = (req, res) => {
@@ -59,15 +59,15 @@ exports.getMediumBlogs = (req, res) => {
 exports.getBlogBySlug = (req, res) => {
   const slug = req.params.slug;
 
-  Blog.findOne({slug})
-      .populate('author -_id -password -products -email -role')
-      .exec(function(errors, foundBlog) {
-    if (errors) {
-      return res.status(422).send(errors);
-    }
+  Blog.findOne({ slug })
+    .populate('author -_id -password -products -email -role')
+    .exec(function (errors, foundBlog) {
+      if (errors) {
+        return res.status(422).send(errors);
+      }
 
-    return res.json(foundBlog);
-  });
+      return res.json(foundBlog);
+    });
 }
 
 exports.getBlogById = (req, res) => {
@@ -85,9 +85,9 @@ exports.getBlogById = (req, res) => {
 exports.getUserBlogs = (req, res) => {
   const user = req.user;
 
-  Blog.find({author: user.id}, function(errors, userBlogs) {
+  Blog.find({ author: user.id }, function (errors, userBlogs) {
     if (errors) {
-     return res.status(422).send(errors);
+      return res.status(422).send(errors);
     }
 
     return res.json(userBlogs);
@@ -98,7 +98,7 @@ exports.updateBlog = (req, res) => {
   const blogId = req.params.id;
   const blogData = req.body;
 
-  Blog.findById(blogId, function(errors, foundBlog) {
+  Blog.findById(blogId, function (errors, foundBlog) {
     if (errors) {
       return res.status(422).send(errors);
     }
@@ -106,16 +106,16 @@ exports.updateBlog = (req, res) => {
     if (blogData.status && blogData.status === 'published' && !foundBlog.slug) {
 
       foundBlog.slug = slugify(foundBlog.title, {
-                                  replacement: '-',    // replace spaces with replacement
-                                  remove: null,        // regex to remove characters
-                                  lower: true          // result in lower case
-                                });
+        replacement: '-',    // replace spaces with replacement
+        remove: null,        // regex to remove characters
+        lower: true          // result in lower case
+      });
 
-      }
+    }
 
-      foundBlog.set(blogData);
-      foundBlog.updatedAt = new Date();
-      foundBlog.save(function(errors, foundBlog) {
+    foundBlog.set(blogData);
+    foundBlog.updatedAt = new Date();
+    foundBlog.save(function (errors, foundBlog) {
       if (errors) {
         return res.status(422).send(errors);
       }
@@ -130,25 +130,25 @@ exports.createBlog = (req, res) => {
   const lockId = req.query.lockId;
 
   if (!lock.isBusy(lockId)) {
-    lock.acquire(lockId, function(done) {
-    const blogData = req.body;
-    const blog = new Blog(blogData);
-    blog.author = req.user;
+    lock.acquire(lockId, function (done) {
+      const blogData = req.body;
+      const blog = new Blog(blogData);
+      blog.author = req.user;
 
-    blog.save((errors, createdBlog) => {
-      setTimeout(() => done(), 5000);
+      blog.save((errors, createdBlog) => {
+        setTimeout(() => done(), 5000);
 
-      if (errors) {
-        return res.status(422).send(errors);
-      }
+        if (errors) {
+          return res.status(422).send(errors);
+        }
 
-      return res.json(createdBlog);
-    });
-    }, function(errors, ret) {
-        errors && console.error(errors)
+        return res.json(createdBlog);
+      });
+    }, function (errors, ret) {
+      errors && console.error(errors)
     });
   } else {
-    return res.status(422).send({message: 'Blog is getting saved!'});
+    return res.status(422).send({ message: 'Blog is getting saved!' });
   }
 }
 
@@ -156,12 +156,12 @@ exports.createBlog = (req, res) => {
 exports.deleteBlog = (req, res) => {
   const blogId = req.params.id;
 
-  Blog.deleteOne({_id: blogId}, function(errors) {
+  Blog.deleteOne({ _id: blogId }, function (errors) {
     if (errors) {
       return res.status(422).send(errors);
     }
 
-    res.json({status: 'deleted'});
+    res.json({ status: 'deleted' });
   });
 }
 
